@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belanjawan 2025 Document Version Control Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1400px;
+            margin-bottom: 30px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .latest-version {
+            color: green;
+            font-weight: bold;
+        }
+
+        .update-button {
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .update-button:hover {
+            background-color: #218838;
+        }
+
+        .download-button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Popup Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Document Version Control Dashboard</h1>
+
+        <!-- Speech Component Table -->
+        <div class="component-section">
+            <h2>Speech Documents</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Latest Version</th>
+                        <th>Last Modified</th>
+                        <th>Modified By</th>
+                        <th>Document URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bahasa Malaysia</td>
+                        <td class="latest-version">v3 (2024-10-26)</td>
+                        <td>2024-10-26</td>
+                        <td>John Doe</td>
+                        <td><a href="https://drive.google.com/example-link-bm" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Speech', 'Bahasa Malaysia')">Update</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td class="latest-version">v3 (2024-10-26)</td>
+                        <td>2024-10-26</td>
+                        <td>Jane Smith</td>
+                        <td><a href="https://onedrive.com/example-link-en" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Speech', 'English')">Update</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Touchpoints Component Table -->
+        <div class="component-section">
+            <h2>Touchpoints Documents</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Latest Version</th>
+                        <th>Last Modified</th>
+                        <th>Modified By</th>
+                        <th>Document URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bahasa Malaysia</td>
+                        <td class="latest-version">v2 (2024-10-25)</td>
+                        <td>2024-10-25</td>
+                        <td>Alex Tan</td>
+                        <td><a href="https://drive.google.com/example-link-bm-touchpoints" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Touchpoints', 'Bahasa Malaysia')">Update</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td class="latest-version">v2 (2024-10-25)</td>
+                        <td>2024-10-25</td>
+                        <td>Sarah Lee</td>
+                        <td><a href="https://onedrive.com/example-link-en-touchpoints" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Touchpoints', 'English')">Update</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tax Measures Component Table -->
+        <div class="component-section">
+            <h2>Tax Measures Documents</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Latest Version</th>
+                        <th>Last Modified</th>
+                        <th>Modified By</th>
+                        <th>Document URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bahasa Malaysia</td>
+                        <td class="latest-version">v1 (2024-10-24)</td>
+                        <td>2024-10-24</td>
+                        <td>Daniel Wong</td>
+                        <td><a href="https://drive.google.com/example-link-bm-taxmeasures" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Tax Measures', 'Bahasa Malaysia')">Update</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>English</td>
+                        <td class="latest-version">v1 (2024-10-24)</td>
+                        <td>2024-10-24</td>
+                        <td>Michael Chia</td>
+                        <td><a href="https://onedrive.com/example-link-en-taxmeasures" target="_blank">Open Link</a></td>
+                        <td>
+                            <button class="update-button" onclick="showUpdateForm('Tax Measures', 'English')">Update</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeUpdateForm()">&times;</span>
+            <h2>Update Document Information</h2>
+            <form>
+                <label for="document-type">Document Type:</label>
+                <input type="text" id="document-type" name="document-type" readonly><br><br>
+
+                <label for="language">Language:</label>
+                <input type="text" id="language" name="language" readonly><br><br>
+
+                <label for="version">Version:</label>
+                <input type="text" id="version" name="version" placeholder="e.g., v4"><br><br>
+
+                <label for="last-modified">Last Modified Date:</label>
+                <input type="date" id="last-modified" name="last-modified"><br><br>
+
+                <label for="modified-by">Modified By:</label>
+                <input type="text" id="modified-by" name="modified-by" placeholder="Name of the person"><br><br>
+
+                <label for="document-url">Document URL:</label>
+                <input type="url" id="document-url" name="document-url" placeholder="https://example.com"><br><br>
+
+                <button type="button" class="update-button" onclick="saveUpdate()">Save Update</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showUpdateForm(docType, language) {
+            document.getElementById('document-type').value = docType;
+            document.getElementById('language').value = language;
+            document.getElementById('update-modal').style.display = 'block';
+        }
+
+        function closeUpdateForm() {
+            document.getElementById('update-modal').style.display = 'none';
+        }
+
+        function saveUpdate() {
+            alert('Document information updated! Make sure to update the shared repository with the latest changes.');
+            closeUpdateForm();
+            // In a real implementation, this function would save updates to a database or shared file
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('update-modal')) {
+                closeUpdateForm();
+            }
+        }
+    </script>
+
+</body>
+</html>
